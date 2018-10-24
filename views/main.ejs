@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>LCDwWS</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+</head>
+
+<style>
+    html {
+        height: 100%;
+    }
+
+    body {
+        min-height: 100%;
+    }
+
+    .gradient-background {
+        background: linear-gradient(to top left, powderblue, pink);
+    }
+
+    .centered {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .buttons {
+        width: 200px;
+    }
+</style>
+
+<body class="gradient-background centered">
+    <div class="col-12">
+        <h1 class="centered col-12">LED</h1>
+        <hr class="col-9">
+        <div class="btn-group btn-group-toggle centered col-12" id="buttons" data-toggle="buttons">
+            <label class="btn btn-outline-dark active col-3">
+                <input type="radio" name="options" id="option1" autocomplete="off" checked value="off"> OFF
+            </label>
+            <label class="btn btn-outline-dark col-3">
+                <input type="radio" name="options" id="option2" autocomplete="off" value="on"> ON
+            </label>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script>
+        $('#buttons .btn').on('click', function (event) {
+            var clicked = $(this).find('input').val()
+            if (clicked === "off") {
+                $.ajax({
+                    type: 'GET',
+                    url: "/?state=off",
+                    success: function(result) {
+                        $(".gradient-background").css({ "background": "linear-gradient(to top left, powderblue, pink)" })
+                    }
+                })
+            }
+            if (clicked === "on") {
+                $.ajax({
+                    type: 'GET',
+                    url: "/?state=on",
+                    success: function(result) {
+                        $(".gradient-background").css({ "background": "linear-gradient(to top left, #138D75, #FCF3CF)" })
+                    }
+                })
+            }
+        });
+    </script>
+</body>
+<html>

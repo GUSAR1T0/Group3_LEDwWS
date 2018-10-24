@@ -1,6 +1,8 @@
 const Express = require("express")
 const requests = require("./requests")
 
+const viewsPath = require('path').join(__dirname, '../views')
+
 class ServerHandler {
     constructor(port, host) {
         this.port = port
@@ -8,8 +10,13 @@ class ServerHandler {
         this.app = Express()
     }
 
-    init() {
+    setup() {
+        this.app.engine('html', require('ejs').renderFile)
+        this.app.set('view engine', 'ejs')
+        this.app.set('views', viewsPath)
+
         requests.all(this.app)
+
         return this
     }
 
@@ -20,7 +27,7 @@ class ServerHandler {
 
 class Server {
     launch(port, host) {
-        new ServerHandler(port, host).init().launch()
+        new ServerHandler(port, host).setup().launch()
     }
 }
 
