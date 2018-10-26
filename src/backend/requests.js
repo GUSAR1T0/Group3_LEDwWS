@@ -12,7 +12,7 @@ function mainPage(app) {
             console.log(`[${new Date().toString()}] LED OFF`)
             res.send(req.body);
         } else {
-            pin.write(gpio.LOW, (err, value) => { })            
+            pin.write(gpio.LOW, (err, value) => { })
             res.render("main")
         }
     })

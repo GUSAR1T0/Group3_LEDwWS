@@ -1,7 +1,9 @@
 const Express = require("express")
 const requests = require("./requests")
+const path = require('path')
 
-const viewsPath = require('path').join(__dirname, '../views')
+const staticPath = path.join(__dirname, '../')
+const viewsPath = path.join(staticPath, 'views')
 
 class ServerHandler {
     constructor(port, host) {
@@ -14,6 +16,7 @@ class ServerHandler {
         this.app.engine('html', require('ejs').renderFile)
         this.app.set('view engine', 'ejs')
         this.app.set('views', viewsPath)
+        this.app.use(Express.static(staticPath));
 
         requests.all(this.app)
 
