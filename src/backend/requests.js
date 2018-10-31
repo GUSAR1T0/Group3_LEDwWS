@@ -1,7 +1,15 @@
 const gpio = require("onoff").Gpio
-var pin = new gpio(17, "out")
+const dht = require('rpi-dht-sensor');
+
+function read() {
+    var pin27 = new dht.DHT22(27);
+    var readout = pin27.read();
+    console.log('Temperature: ' + readout.temperature.toFixed(2) + 'C, ' +
+        'humidity: ' + readout.humidity.toFixed(2) + '%');
+}
 
 function mainPage(app) {
+    var pin = new gpio(17, "out")
     app.get("/", (req, res) => {
         if (req.query["state"] === "on") {
             pin.write(gpio.HIGH, (err, value) => { })

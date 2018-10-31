@@ -6,7 +6,8 @@
   "dependencies": {
     "ejs": "^2.6.1",
     "express": "^4.16.4",
-    "onoff": "^3.2.2"
+    "onoff": "^3.2.2",
+    "rpi-dht-sensor": "^0.1.1"
   },
   "devDependencies": {},
   "scripts": {
